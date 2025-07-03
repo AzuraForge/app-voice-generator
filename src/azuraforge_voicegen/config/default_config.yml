@@ -1,0 +1,16 @@
+pipeline_name: "voice_generator"
+
+data_sourcing:
+  # Şu anda paket içindeki veriyi kullanıyor.
+  data_source: "package_data"
+  # Ses verisini 8-bit'e indirerek kelime dağarcığını (vocab_size) küçültüyoruz.
+  quantization_bits: 8
+
+model_params:
+  sequence_length: 256
+  embedding_dim: 128
+  hidden_size: 256
+
+training_params:
+  epochs: 20
+  lr: 0.001

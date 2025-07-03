@@ -45,22 +45,17 @@ class VoiceGeneratorPipeline(AudioGenerationPipeline):
         return encoded_waveform
 
     def _create_model(self, vocab_size: int) -> Sequential:
-        """
-        Embedding, LSTM ve Linear katmanlarından oluşan basit bir üretken model.
-        """
         self.logger.info(f"Creating a generative model with vocab_size: {vocab_size}")
-        
         model_params = self.config.get("model_params", {})
         embedding_dim = model_params.get("embedding_dim", 128)
         hidden_size = model_params.get("hidden_size", 256)
 
         model = Sequential(
-            # Girdi: (N, seq_len) tamsayı indeksler
             Embedding(num_embeddings=vocab_size, embedding_dim=embedding_dim),
-            # -> (N, seq_len, embedding_dim)
+            # LSTM katmanının çıktısı: (N, seq_len, hidden_size) olmalı.
+            # Core/Learner'daki LSTM'i tüm sekansı döndürecek şekilde güncellememiz gerekiyor.
+            # Şimdilik basit bir RNN yapısı gibi varsayalım.
             LSTM(input_size=embedding_dim, hidden_size=hidden_size),
-            # -> (N, hidden_size)
             Linear(hidden_size, vocab_size)
-            # -> (N, vocab_size) -> Bu, her bir sonraki ses örneği için olasılık dağılımıdır (logits).
         )
         return model

@@ -1,3 +1,4 @@
+# app-voice-generator/src/azuraforge_voicegen/config/default_config.yml
 pipeline_name: "voice_generator"
 
 data_sourcing:
@@ -5,6 +6,7 @@ data_sourcing:
   data_source: "package_data"
   # Ses verisini 8-bit'e indirerek kelime dağarcığını (vocab_size) küçültüyoruz.
   quantization_bits: 8
+  sample_rate: 8000 # Yeni eklendi
 
 model_params:
   sequence_length: 256

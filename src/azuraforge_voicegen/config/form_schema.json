@@ -1,6 +1,28 @@
 {
     "groups": [
         {
+            "id": "data_sourcing",
+            "name": "Veri Kaynağı",
+            "fields": [
+                {
+                    "id": "quantization_bits",
+                    "path": "data_sourcing.quantization_bits",
+                    "label": "Kuantizasyon Biti",
+                    "type": "text",
+                    "placeholder": "Örn: 8 (256 kanal için)",
+                    "help_text": "Ses verisinin sıkıştırılacağı bit sayısı. (2^bit = kanal sayısı)."
+                },
+                {
+                    "id": "sample_rate",
+                    "path": "data_sourcing.sample_rate",
+                    "label": "Örnekleme Hızı (Sample Rate)",
+                    "type": "text",
+                    "placeholder": "Örn: 8000, 16000",
+                    "help_text": "Ses verisinin örnekleme hızı (Hz)."
+                }
+            ]
+        },
+        {
             "id": "model_params",
             "name": "Model Parametreleri",
             "fields": [

@@ -10,6 +10,7 @@ requires-python = ">=3.10"
 dependencies = [
     "azuraforge-learner @ git+https://github.com/AzuraForge/learner.git@main",
     "scipy", # .wav dosyalarını okumak için
+    "PyYAML" # .yml konfigürasyon dosyalarını okumak için
 ]
 
 [project.entry-points]

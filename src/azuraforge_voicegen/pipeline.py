@@ -1,5 +1,3 @@
-# Bu dosyada bir değişiklik yapmıyoruz, ancak içeriğinin doğruluğunu teyit edelim.
-# Buradaki mantık, learner'daki AudioGenerationPipeline'in doğru çalışmasına bağlı.
 import numpy as np
 import yaml
 from importlib import resources
@@ -9,7 +7,6 @@ from pydantic import BaseModel
 
 from azuraforge_learner import Sequential, Embedding, LSTM, Linear, AudioGenerationPipeline
 
-# get_default_config ve mu_law_encode fonksiyonları aynı kalıyor...
 def get_default_config():
     with resources.open_text("azuraforge_voicegen.config", "default_config.yml") as f:
         return yaml.safe_load(f)
@@ -19,7 +16,6 @@ def mu_law_encode(audio, quantization_channels):
     audio_float = audio.astype(np.float32) / np.iinfo(audio.dtype).max
     encoded = np.sign(audio_float) * np.log1p(mu * np.abs(audio_float)) / np.log1p(mu)
     return ((encoded + 1) / 2 * mu + 0.5).astype(np.int64)
-
 
 class VoiceGeneratorPipeline(AudioGenerationPipeline):
     """
@@ -54,8 +50,6 @@ class VoiceGeneratorPipeline(AudioGenerationPipeline):
         embedding_dim = model_params.get("embedding_dim", 128)
         hidden_size = model_params.get("hidden_size", 256)
 
-        # return_sequences=True, her zaman adımının çıktısını sonraki katmana aktarır.
-        # Bu, ardışık Linear katman için gereklidir.
         model = Sequential(
             Embedding(num_embeddings=vocab_size, embedding_dim=embedding_dim),
             LSTM(input_size=embedding_dim, hidden_size=hidden_size, return_sequences=True), 

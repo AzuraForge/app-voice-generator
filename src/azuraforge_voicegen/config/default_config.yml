@@ -1,9 +1,7 @@
 pipeline_name: "voice_generator"
 
 data_sourcing:
-  # Şu anda paket içindeki veriyi kullanıyor.
   data_source: "package_data"
-  # Ses verisini 8-bit'e indirerek kelime dağarcığını (vocab_size) küçültüyoruz.
   quantization_bits: 8
   sample_rate: 8000 
 
@@ -13,5 +11,7 @@ model_params:
   hidden_size: 256
 
 training_params:
-  epochs: 20
+  epochs: 10 # Daha az epoch ile daha hızlı sonuç alalım
   lr: 0.001
+  # YENİ: Batch size ekledik, pipeline bunu kullanacak
+  batch_size: 128

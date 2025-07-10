@@ -2,7 +2,7 @@ import numpy as np
 import yaml
 from importlib import resources
 from scipy.io import wavfile
-from scipy import signal,resample # Yeniden örnekleme için
+from scipy import signal # Yeniden örnekleme için
 from typing import Tuple, Optional, Any, Dict
 from pydantic import BaseModel
 
